@@ -1,0 +1,67 @@
+{% load static %}
+<html>
+<head>
+<title>Breast Cancer Classification</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+<script language="javascript">
+	function validate(formObj)
+	{
+	if(formObj.t1.value.length==0)
+	{
+	alert("Please Upload Test Image");
+	formObj.t1.focus();
+	return false;
+	}
+	formObj.actionUpdateData.value="update";
+	return true;
+	}
+	</script>	
+</head>
+<style>
+body {
+  background-image: url("{% static 'images/back.jpg' %}");
+}
+</style>
+<body>
+<div class="main">
+  <div class="main_resize">
+    <div class="header">
+      <div class="logo">
+        <h1><span>FCM & Deep Learning Based Breast Cancer Segmentation & Classification</span><small></small></h1>
+      </div>
+    </div>
+    <div class="content">
+      <div class="content_bg">
+        <div class="menu_nav">
+        <ul>
+       
+      <li><a href="{% url 'UploadDataset' %}">Load CBIS-DDSM Data</a></li>
+	  <li><a href="{% url 'RunGan' %}">Run GAN</a></li>
+	  <li><a href="{% url 'RunPso' %}">Run VGG & PSO</a></li>
+	  <li><a href="{% url 'TrainML' %}">Train ML Models</a></li>
+	  <li><a href="{% url 'Predict' %}">Test Image Classification</a></li>
+	  <li><a href="{% url 'index' %}">Logout</a></li>
+   </ul>
+        </div>
+        <div class="hbg"><img src="{% static 'images/header_images.jpeg' %}" width="915" height="286" alt="" /></div>
+      				<center>
+<form name="f1" method="post" action={% url 'PredictAction' %} enctype="multipart/form-data" onsubmit="return validate(this);">
+{% csrf_token %}<br/>
+   <h2><b>Upload Test Image to Classify Cancer Disease Screen</b></h2>
+   
+	<font size="3" color="red"><center>{{ data }}</center></font>
+						
+						<table align="center" width="30%" >
+			 <tr><td><font size='' color="black">Upload&nbsp;Image</b></td>
+			 <td><input type="file" name="t1" style="font-family: Comic Sans MS"></td></tr>
+         
+				<tr><td></td><td><input type="submit" value="Submit"></td>
+			</table>
+				</div>	
+					
+				</div>
+				
+					
+	</body>
+</html>
